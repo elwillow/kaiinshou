@@ -1,0 +1,15 @@
+Options +ExecCGI
+AddHandler cgi-script .py
+DirectoryIndex index.py
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteBase /inscription/
+    RewriteCond %{REQUEST_URI} !^/inscription/favicon.ico$
+    RewriteCond %{REQUEST_URI} !^/inscription/static/(.*)$
+    RewriteCond %{REQUEST_URI} !^(/.*)+app.py/
+    RewriteRule ^(.*)$ /inscription/app.py/$1 [PT]
+#    RewriteCond %{REQUEST_FILENAME} !-f
+#    RewriteCond %{REQUEST_FILENAME} !-d
+#    RewriteRule ^ app.py
+</IfModule>
+

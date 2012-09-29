@@ -1,0 +1,41 @@
+$def with (cart_id, items, messageInfo=None)
+
+<form target="paypal" action="$paypalUrl/cgi-bin/webscr" method="POST">
+<input type="hidden" name="cmd" value="_cart" />
+<input type="hidden" name="upload" value="1" />
+<input type="hidden" name="business" value="$paypalAccount" />
+<input type="hidden" name="currency_code" value="CAD" />
+<input type="hidden" name="invoice" value="$cart_id" />
+
+
+$if messageInfo:
+    $if messageInfo[0] == "add":
+        <span id="message" class="good">
+        L'insigne à été ajouté avec succès.
+    $if messageInfo[0] == "update":
+        <span id="message" class="good">
+        L'insigne à été modifié avec succès.
+    $if messageInfo[0] == "del":
+        <span id="message" class="bad">
+        L'insigne à été supprimé avec succès.
+    </span>
+
+
+$if items:
+    <table id="listing">
+    $for item in items:
+        $:render.item(item, loop.index)
+    </table>
+$else:
+    <table><tr><th class="buttons" style="text-align: center"><a href="badge" style="font-size:16px;" class="positive">Ajouter un insigne ~ Add a badge</a></th></tr></table>
+
+<div id="bottom" class="buttons">
+<div style="float: left;"><a href="$homeAddr/badge">Ajouter un nouvel insigne ~ Add a new badge</a></div>
+
+$if items:
+    <input type="hidden" name="return" value="$homeAddr/merci" />
+    <input type="hidden" name="cancel_return" value="$homeAddr/annulee" />
+    <input type="hidden" name="notify_url" value="$homeAddr/callback" />
+    <div id="paypal" style="float: right;"><input type="image" border="0" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif"></div>
+</div>
+</form>

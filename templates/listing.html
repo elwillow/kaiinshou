@@ -1,0 +1,23 @@
+$def with (items, messageInfo=None)
+
+
+$if messageInfo:
+    $if messageInfo[0] == "add":
+        <div id="message" class="good">
+        <h3>Le badge à été ajouté avec succès</h3>
+    $if messageInfo[0] == "del":
+        <div id="message" class="bad">
+        <h3>Le badge à été suprimmé avec succès</h3>
+    </div>
+
+
+$if items:
+    <table id="listing">
+    $for item in items:
+        $:render.item(item)
+    </table>
+$else:
+    <table><tr><th><a href="/badge">ADD YOUR FIRST BADGE</a></th></tr></table>
+
+<div id="bottom" class="buttons"><a href="/badge">Ajouter une nouvelle badge</a> ~ <a href="/merci">Kill Cart</a>
+</div>

@@ -1,0 +1,11 @@
+$def with (items)
+$if items:
+    <table id="listing">
+    $for item in items:
+        <tr>
+        <th>$item["badge_number"]</th><td>$item["prenom"] $item["nom"]</td>
+        <td class="type">$badgeInfo(item)[0]</td><td>$badgeInfo(item)[1] $$</td>
+        </tr>
+    </table>
+$else:
+    <table id="listing"><tr><td class="bad">Something broke!<td></tr></table>
