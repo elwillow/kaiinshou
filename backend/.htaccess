@@ -19,11 +19,11 @@ DirectoryIndex index.py
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /inscription/
-  RewriteCond %{REQUEST_URI} !^/inscription/favicon.ico$
-  RewriteCond %{REQUEST_URI} !^/inscription/static/(.*)$
+  RewriteBase /backend/
+  RewriteCond %{REQUEST_URI} !^/favicon.ico$
+  RewriteCond %{REQUEST_URI} !^/static/(.*)$
   RewriteCond %{REQUEST_URI} !^(/.*)+app.py/
-  RewriteRule ^(.*)$ /inscription/app.py/$1 [PT]
+  RewriteRule ^(.*)$ /backend/app.py/$1 [PT]
 #    RewriteCond %{REQUEST_FILENAME} !-f
 #    RewriteCond %{REQUEST_FILENAME} !-d
 #    RewriteRule ^ app.py

@@ -6,6 +6,7 @@ import web
 from pymongo import Connection
 
 # Database configuration
+#mongoURI = "mongodb://ganime:2EKY7BSN@127.0.0.1/registration-dev"
 mongoURI = "mongodb://ganime:2EKY7BSN@127.0.0.1/registration"
 
 # For testing puposes
