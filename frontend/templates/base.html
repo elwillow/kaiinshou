@@ -4,54 +4,88 @@ $def with (page, title=None, minimal=False)
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>$title</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>$title</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<link href="favicon.ico" rel="shortcut icon">
 
 
-        <link rel="stylesheet" href="/css/normalize.css">
-        <link rel="stylesheet" href="/css/main.css">
-	<link rel="stylesheet" href="/css/style.css" />
-        <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
+<link rel="stylesheet" href="/css/normalize.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/style-old.css" />
+<link rel="stylesheet" href="/css/skin.css" />
+<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
 
-<div id="wrapper">
+<div class="container">
+
+<header class="header clearfix">
+<div class="logo">Kaiinshou</div>
+<nav class="menu_main">
+<ul>
+<li class="active"><a href="#">About</a></li>
+<li><a href="#">Skins</a></li>
+<li><a href="#">Samples</a></li>
+</ul>
+</nav>
+</header>
+
+<div class="info">
+
+<article class="hero clearfix">
+<div class="col_100">
 $if minimal:
-    <div id="header" style="height: 50px;">
     <h1>Pré-inscription ~ Preregistration</h1>
     <p>G-Anime 2013</p>
 $else:
-    <div id="header">
     <h1>Pré-inscription ~ Preregistration</h1>
     <p>Bienvenue au site de préinscription à G-Anime 2013. Pour plus d'information sur G-Anime, allez sur le <a href="http://ganime.ca/2013">site web officiel du festival</a>. Notez que le courriel de confirmation sera envoyé à votre courriel PayPal. Si vous voulez également vous inscrire au concert de NOIZ, qui aura lieu le vendredi, visitez le site web de préinscription (mettre l'hyperlien au site de Noiz sur site web de préinscription) au concert de NOIZ.</p>
     <p>Welcome, here you may pre-register for G-Anime 2013. For more information on G-Anime, take a look at <a href="http://ganime.ca/2013">the official website</a>. Please note that the confirmation email will be sent to your PalPal email address. If you also wish to register for the NOIZ concert on Friday, please visit the NOIZ registration page here.</p>
-</div><!-- #header -->
-<div id="main">
-<div id="content" role="main">
-$:page
-</div><!-- #content -->
-</div><!-- #main -->
-</div><!-- #wrapper -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
-        <script src="/js/plugins.js"></script>
-        <script src="/js/main.js"></script>
+</div>
+</article>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+<article class="article clearfix">
+<div class="col_100" id="content">
+$:page
+</div>
+</article>
+
+</div>
+
+
+<footer class="footer clearfix">
+<div class="copyright">Hyberia & SAJG</div>
+<nav class="menu_bottom">
+<ul>
+<li class="active"><a href="#">About</a></li>
+<li><a href="#">Skins</a></li>
+<li><a href="#">Samples</a></li>
+</ul>
+</nav>
+</footer>
+
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+<script src="/js/plugins.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+</body>
 </html>
