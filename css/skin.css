@@ -302,16 +302,18 @@ a.negative:active{
   -webkit-box-shadow: #eee 6px 6px 10px;
   -moz-box-shadow: #eee 6px 6px 10px;
   box-shadow: #eee 6px 6px 10px;
+  margin: 10px;
 }
 .success {
   color:#000;
-  background:#89BFDC;
-  border-color:#89BFDC;
+  background:#05C400;
+  border-color:#05C400;
   padding:8px 14px;
   position:relative;
   -webkit-box-shadow: #eee 6px 6px 10px;
   -moz-box-shadow: #eee 6px 6px 10px;
   box-shadow: #eee 6px 6px 10px;
+  margin: 10px;
 }
 .message {
   color:#000;
@@ -322,6 +324,7 @@ a.negative:active{
   -webkit-box-shadow: #eee 6px 6px 10px;
   -moz-box-shadow: #eee 6px 6px 10px;
   box-shadow: #eee 6px 6px 10px;
+  margin: 10px;
 }
 
 .warning:before,

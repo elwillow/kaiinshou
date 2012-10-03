@@ -1,5 +1,7 @@
 $def with (form)
 
+<article class="clearfix">
+<div class="col_100">
 <form name="main" method="post">
 $if not form.valid: <p class="error">Une erreur est survenue.</p>
 $:form.render()
@@ -10,3 +12,5 @@ Kids 12 and under must be accompanied by an adult.</p>
 <button type="submit" class="positive" name="add" style="font-size: 18px; line-height:24px; float: right">Ajouter ~ Add</button>
 </div>
 </form>
+</div>
+</article>

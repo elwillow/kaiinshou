@@ -7,8 +7,10 @@ $def with (cart_id, items, messageInfo=None)
 <input type="hidden" name="currency_code" value="CAD" />
 <input type="hidden" name="invoice" value="$cart_id" />
 
+<article class="article clearfix">
 
 $if messageInfo:
+    <div class="col_100">
     $if messageInfo[0] == "add":
         <div class="success">
         L'insigne à été ajouté avec succès.
@@ -18,15 +20,14 @@ $if messageInfo:
     $if messageInfo[0] == "del":
         <div class="warning">
         L'insigne à été supprimé avec succès.
-    </div>
+    </div></div>
 
-
-<article class="article clearfix">
 <div class="col_33">
-<p>Bienvenue au site de préinscription à G-Anime 2013. Pour plus d'information sur G-Anime, allez sur le <a href="http://ganime.ca/2013">site web officiel du festival</a>. Notez que le courriel de confirmation sera envoyé à votre courriel PayPal. Si vous voulez également vous inscrire au concert de NOIZ, qui aura lieu le vendredi, visitez le site web de préinscription (mettre l'hyperlien au site de Noiz sur site web de préinscription) au concert de NOIZ.</p>
-<p>Welcome, here you may pre-register for G-Anime 2013. For more information on G-Anime, take a look at <a href="http://ganime.ca/2013">the official website</a>. Please note that the confirmation email will be sent to your PalPal email address. If you also wish to register for the NOIZ concert on Friday, please visit the NOIZ registration page here.</p>
+<p>Bienvenue au site de préinscription à G-Anime 2013. Pour plus d'information sur G-Anime, allez sur le <a href="http://ganime.ca/2013">site web officiel du festival</a>. Notez que le courriel de confirmation sera envoyé à votre courriel PayPal. <strong>Si vous voulez également vous inscrire au concert de NOIZ, qui aura lieu le vendredi, ajouter le billet dans le formulaire d'un insigne</strong>.</p>
+<p>Welcome, here you may pre-register for G-Anime 2013. For more information on G-Anime, take a look at <a href="http://ganime.ca/2013">the official website</a>. Please note that the confirmation email will be sent to your PalPal email address. <strong>If you also wish to register for the NOIZ concert on Friday, add the option in the badge form</strong>.</p>
 </div>
 <div class="col_66">
+<h2>Your cart ~ Votre panier</h2>
 $if items:
     <table class="table">
     $for item in items:
