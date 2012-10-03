@@ -10,32 +10,42 @@ $def with (cart_id, items, messageInfo=None)
 
 $if messageInfo:
     $if messageInfo[0] == "add":
-        <span id="message" class="good">
+        <div class="success">
         L'insigne à été ajouté avec succès.
     $if messageInfo[0] == "update":
-        <span id="message" class="good">
+        <div class="success">
         L'insigne à été modifié avec succès.
     $if messageInfo[0] == "del":
-        <span id="message" class="bad">
+        <div class="warning">
         L'insigne à été supprimé avec succès.
-    </span>
+    </div>
 
 
+<article class="article clearfix">
+<div class="col_33">
+<p>Bienvenue au site de préinscription à G-Anime 2013. Pour plus d'information sur G-Anime, allez sur le <a href="http://ganime.ca/2013">site web officiel du festival</a>. Notez que le courriel de confirmation sera envoyé à votre courriel PayPal. Si vous voulez également vous inscrire au concert de NOIZ, qui aura lieu le vendredi, visitez le site web de préinscription (mettre l'hyperlien au site de Noiz sur site web de préinscription) au concert de NOIZ.</p>
+<p>Welcome, here you may pre-register for G-Anime 2013. For more information on G-Anime, take a look at <a href="http://ganime.ca/2013">the official website</a>. Please note that the confirmation email will be sent to your PalPal email address. If you also wish to register for the NOIZ concert on Friday, please visit the NOIZ registration page here.</p>
+</div>
+<div class="col_66">
 $if items:
-    <table id="listing">
+    <table class="table">
     $for item in items:
         $:render.item(item, loop.index)
     </table>
+    <div style="float: left;"><a class="button" href="$homeAddr/badge">Ajouter un nouvel insigne ~ Add a new badge</a></div>
 $else:
-    <table><tr><th class="buttons" style="text-align: center"><a href="badge" style="font-size:16px;" class="positive">Ajouter un insigne ~ Add a badge</a></th></tr></table>
+    <table><tr><th style="text-align: center"><a href="badge" style="font-size:16px;" class="positive button">Ajouter un insigne ~ Add a badge</a></th></tr></table>
+</div>
+</article>
 
-<div id="bottom" class="buttons">
-<div style="float: left;"><a href="$homeAddr/badge">Ajouter un nouvel insigne ~ Add a new badge</a></div>
-
+<article class="article clearfix">
+<div class="col_100">
 $if items:
     <input type="hidden" name="return" value="$homeAddr/merci" />
     <input type="hidden" name="cancel_return" value="$homeAddr/annulee" />
     <input type="hidden" name="notify_url" value="$homeAddr/callback" />
-    <div id="paypal" style="float: right;"><input type="image" border="0" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif"></div>
+    <div id="paypal" style="float: right;"><input type="image" border="0" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif">
+    </div>
 </div>
+</article>
 </form>

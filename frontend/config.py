@@ -26,8 +26,9 @@ email = {
     }
 
 # Web.py stuff
-web.config.debug = False
-web.ctx.home = "https://secure.sajg.net/inscription"
+web.config.debug = True
+#web.ctx.home = "https://secure.sajg.net/inscription"
+web.ctx.home = "http://localhost/frontend/"
 cache = False
 
 # Initialize the MongoDB connection

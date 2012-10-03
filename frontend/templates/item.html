@@ -2,7 +2,7 @@ $def with (item, i)
 <tr>
 <th>$item["badge_number"]</th><td>$item["prenom"] $item["nom"]</td>
 <td class="type">$badgeInfo(item)[0]</td><td>$badgeInfo(item)[1] $$</td>
-<td width=50 class="buttons"><a href="$homeAddr/edit/$item['_id']">Modifier ~ Edit</a>
+<td width=50><a class="button" href="$homeAddr/edit/$item['_id']">Modifier&nbsp;~&nbsp;Edit</a>
 $:builtPaypalInput(item, i)
 </td>
 </tr>

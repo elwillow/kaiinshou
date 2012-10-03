@@ -12,12 +12,12 @@ $if messageInfo:
 
 
 $if items:
-    <table id="listing">
+    <table class="table">
     $for item in items:
         $:render.item(item)
     </table>
 $else:
     <table><tr><th><a href="/badge">ADD YOUR FIRST BADGE</a></th></tr></table>
 
-<div id="bottom" class="buttons"><a href="/badge">Ajouter une nouvelle badge</a> ~ <a href="/merci">Kill Cart</a>
+<div id="bottom"><a href="/badge" class="button">Ajouter une nouvelle badge</a> ~ <a href="/merci">Kill Cart</a>
 </div>
