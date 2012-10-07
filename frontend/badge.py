@@ -58,7 +58,13 @@ badgeForm = form.Form(
             ("Friday_Jeune", "Vendredi seulement, 8 à 12 ans / Friday only, 8 to 12 years old ~ 20$"),
         ], form.notnull,
         description="Type de billet / Ticket type"),
-    form.Radio("noiz", ("oui", "non"), value="non", description="Spectacle NOIZ (vendredi soir) / NOIZ show (Friday night)", pre="20 $"),
+    form.Dropdown("noiz",
+        [
+            ("non", "Non / No"),
+            ("oui", "Oui / Yes (20$)")
+        ],
+        value="non",
+        description="Spectacle NOIZ (vendredi soir) / NOIZ show (Friday night)"),
     form.Dropdown("tshirt",
         [
             ("X", "Aucun / None"),
@@ -67,8 +73,13 @@ badgeForm = form.Form(
             ("G", "Grand / Large"),
             ("TG", "Très grand / X-large")
         ], description="T-Shirt", pre="20 $"),
-    form.Checkbox("dvd",
-        description="DVD de la mascarade / Masquerade DVD", pre="20 $"),
+    form.Dropdown("dvd",
+        [
+            ("non", "Non / No"),
+            ("oui", "Oui / Yes (20$)")
+        ],
+        value="non",
+        description="DVD de la mascarade / Masquerade DVD"),
     form.Textarea("instructions_speciales", rows=2, cols=40,
         description="Instructions spécial / Specials Instructions")
     )
@@ -141,7 +152,7 @@ class edit:
             badge["tshirt"] = badge["extra"]["tshirt"]
             badge["dvd"] = badge["extra"]["dvd"]
             f.fill(badge)
-            return render.base(render.badge(f), "Editer une insigne ~ Edit a badge", True)
+            return render.base(render.badge(f), "Modifier une insigne ~ Edit a badge", True)
         else:
             raise web.seeother(config.make_url('/error'))
 

@@ -1,31 +1,81 @@
 $def with (form)
 
-<article class="clearfix">
 <form name="main" method="post">
+
+<article class="clearfix">
 <div class="col_100">
-
 $if not form.valid: <div class="warning">Une erreur est survenue.</div>
+</div>
+</article>
 
-<table class="table">
-$for input in form.inputs:
-    <tr>
-    <th>
-    $:input.description
-    </th>
-    <td>
-    $:input.render()
-    </td>
-    </tr>
-<table>
+<article class="clearfix">
+<div class="col_33">
+<h2> INFORMATION PERSONNEL</h2>
 <p>Les enfants de 12 ans et moins doivent être accompagnés par un adulte.<br />
 Kids 12 and under must be accompanied by an adult.</p>
 </div>
+<div class="col_66">
+<table class="table list">
 
-<div class="col_100">
-<a href="$homeAddr" class="button negative" style="font-size:18px; float:left;">Annuler ~ Cancel</a>
-<button type="submit" class="positive" name="add" style="font-size: 18px; line-height:24px; float: right">Ajouter ~ Add</button>
-</div>
+$for input in [form.prenom, form.nom, form.texte_insigne, form.courriel, form.adresse_1, form.adresse_2, form.ville, form.province, form.code_postal, form.telephone_urgence]:
+    <tr><th>
+    $:input.description
+    </th><td>
+    $:input.render()
+    </td></tr>
+
+</table>
 
 </div>
-</form>
 </article>
+
+<article class="clearfix">
+<div class="col_33">
+<h2>Options</h2>
+</div>
+<div class="col_66">
+<table class="table list">
+$for input in [form.type, form.tshirt, form.dvd]:
+    <tr><th>
+    $:input.description
+    </th><td>
+    $:input.render()
+    </td></tr>
+
+</table>
+</div>
+</article>
+
+<article class="clearfix">
+<div class="col_33">
+<h2>Spectacle de NOIZ</h2>
+<p>Note that you will have priority access if you pre-order your NOIZ ticket</p>
+</div>
+<div class="col_66">
+<table class="table list">
+    <tr><th>
+    $:form.noiz.description
+    </th><td>
+    $:form.noiz.render()
+    </td></tr>
+
+</table>
+</div>
+</article>
+
+<article class="clearfix">
+<div class="col_33">
+<h3>Soumettre</h3>
+<p>Verifier l'information du formulaire avant de soumettre</p>
+</div>
+<div class="col_66">
+<table class="table list">
+<tr><td>
+<a href="$homeAddr" class="button negative">Annuler ~ Cancel</a>
+</td><td style="float: right;">
+<button type="submit" class="positive" name="add">Ajouter ~ Add</button>
+</td></tr></table>
+</div>
+</article>
+
+</form>

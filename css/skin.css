@@ -302,7 +302,7 @@ a.negative:active{
   -webkit-box-shadow: #eee 6px 6px 10px;
   -moz-box-shadow: #eee 6px 6px 10px;
   box-shadow: #eee 6px 6px 10px;
-  margin: 10px;
+  margin: 10px 0px;
 }
 .success {
   color:#000;
@@ -313,7 +313,7 @@ a.negative:active{
   -webkit-box-shadow: #eee 6px 6px 10px;
   -moz-box-shadow: #eee 6px 6px 10px;
   box-shadow: #eee 6px 6px 10px;
-  margin: 10px;
+  margin: 10px 0px;
 }
 .message {
   color:#000;
@@ -324,7 +324,7 @@ a.negative:active{
   -webkit-box-shadow: #eee 6px 6px 10px;
   -moz-box-shadow: #eee 6px 6px 10px;
   box-shadow: #eee 6px 6px 10px;
-  margin: 10px;
+  margin: 10px 0px;
 }
 
 .warning:before,
