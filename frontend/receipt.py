@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 *-*
 #
-#       Filename: config.py
+#       Filename: code.py
 #       Date:     2012-08-14
 #       author:   Mathieu Charron <mathieu@hyberia.ca>
-#       Project:  Kaiinshou
+#       Project:  G-Anime Registration
 #
 #       Copyright 2012 Hyberia Inc.
 #
@@ -34,35 +34,27 @@
 #       (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 #       OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import web
-from pymongo import Connection
+import view
+from view import render
+import bson
 
-# Database configuration
-#mongoURI = "mongodb://ganime:2EKY7BSN@127.0.0.1/registration-dev"
-mongoURI = "mongodb://ganime:2EKY7BSN@127.0.0.1/registration"
+class pickup:
+    def GET(self, cart_id):
+        """Display the badges associated with a Cart ID"""
+        try:
+            bson.objectid.ObjectId(cart_id)
+        except bson.errors.InvalidId:
+            return render.base(render.receipt(None), "Pickup", True)
+        # calculate the taxes 'n' stuff
+        taxes = {"tps": 0, "tvq": 0}
+        badgesList = view.badgeList(cart_id)
+        badges = []
 
-# For testing puposes
-#paypalAccount = "mathie_1345421600_biz@hyberia.ca"
-#paypalUrl = "https://www.sandbox.paypal.com"
-#paypalId = "9B3P56RWHB85Q"
-paypalAccount = "finance@ganime.ca"
-paypalUrl = "https://www.paypal.com"
-paypalId = "SP2X3RHPES2HU"
+        for b in badgesList:
+            badge = view.badgeInfo(b)
+            taxes["tps"] = taxes["tps"] + badge[2][0]
+            taxes["tvq"] = taxes["tvq"] + badge[2][1]
+            badges.append(badge)
+        return badges, taxes
 
-cookieName = "ganime_cartid"
-salt = "+828497786499849"
-email = {
-    "debug_from": "noreply@ganime.ca",
-    "debug": "mathieu.charron@ganime.ca",
-    "notice_from": "inscription@ganime.ca",
-    }
-
-# Web.py stuff
-web.config.debug = True
-#web.ctx.home = "https://secure.sajg.net/inscription"
-web.ctx.home = "http://localhost/frontend/"
-cache = False
-
-# Initialize the MongoDB connection
-connection = Connection(mongoURI)
-DB = connection.registration
+#        return render.base(render.receipt(None), "Pickup", True)

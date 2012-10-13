@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 *-*
 #
-#       Filename: code.py
+#       Filename: app.py
 #       Date:     2012-08-14
 #       author:   Mathieu Charron <mathieu@hyberia.ca>
-#       Project:  G-Anime Registration
+#       Project:  Kaiinshout
 #
 #       Copyright 2012 Hyberia Inc.
 #
@@ -34,8 +34,7 @@
 #       (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 #       OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-import web, os, urlparse
+import web
 import view
 import config
 import db
@@ -45,7 +44,7 @@ urls = (
     "/", "index",
     "/cart/(.*)/(.*)", "cartManagement",
     "/validate/(.*)/email/(.*)", "auth.email",
-    "/pickup/(.*)", "auth.pickup",
+    "/receipt/(.*)", "receipt.pickup",
     "/badge", "badge.create",
     "/badge/(.*)", "badge.display",
     "/edit/(.*)", "badge.edit",

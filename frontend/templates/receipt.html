@@ -1,0 +1,16 @@
+$def with (items, )
+
+<article class="article clearfix">
+
+<div class="col_33">
+<p></p>
+</div>
+<div class="col_66">
+<h2>Votre recu ~ Your Receipt</h2>
+$if items:
+    <table class="table">
+    $for item in items:
+        $:render.item(item, loop.index)
+    </table>
+</div>
+</article>

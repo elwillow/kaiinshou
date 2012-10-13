@@ -35,7 +35,7 @@
 #       OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-import web, os, urlparse
+import web
 import view
 import config
 import db
