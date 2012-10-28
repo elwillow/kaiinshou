@@ -44,17 +44,22 @@ class pickup:
         try:
             bson.objectid.ObjectId(cart_id)
         except bson.errors.InvalidId:
-            return render.base(render.receipt(None), "Pickup", True)
-        # calculate the taxes 'n' stuff
-        taxes = {"tps": 0, "tvq": 0}
+            return cart_id
+            #return render.base(render.receipt(), "Pickup", True)
+        # calculate the taxes
+        numbers = {"tps": 0, "tvq": 0, "taxes": 0, "sub": 0, "total": 0}
         badgesList = view.badgeList(cart_id)
         badges = []
 
         for b in badgesList:
             badge = view.badgeInfo(b)
-            taxes["tps"] = taxes["tps"] + badge[2][0]
-            taxes["tvq"] = taxes["tvq"] + badge[2][1]
+            numbers["tps"] = numbers["tps"] + badge[2]["tps"]
+            numbers["tvq"] = numbers["tvq"] + badge[2]["tvq"]
+            numbers["total"] = numbers["total"] + badge[1]
             badges.append(badge)
-        return badges, taxes
 
-#        return render.base(render.receipt(None), "Pickup", True)
+        # get the sub-total and total
+        numbers["taxes"] = numbers["tps"] + numbers["tvq"]
+        numbers["sub"] = numbers["total"] - numbers["taxes"]
+
+        return render.base(render.receipt(badgesList, badges, numbers), "Receipt", True)

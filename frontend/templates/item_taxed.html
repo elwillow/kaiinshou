@@ -1,0 +1,14 @@
+$def with (item, extend, i)
+<tr style="border:0;">
+<td rowspan=2>$:qrCode(item)</td>
+<th>$item["badge_number"]</th><td>$item["prenom"] $item["nom"]</td>
+<td class="type">$extend[0]</td><td class="summary">$:noTaxes(extend) $$</td>
+</tr>
+<tr>
+<td colspan="3" style="vertical-align: text-top;"><em>
+$if item["texte_insigne"]:
+    Text sur l'insigne: $item["texte_insigne"]<br />
+$if item["instructions_speciales"]:
+    Instructions Speciales: $item["instructions_speciales"]<br />
+</em></td><td></td>
+</tr>

@@ -8,3 +8,14 @@
     font-size: 1.5em;
     margin: 0.83em 0;
 }
+
+.summary {
+    text-align: right;
+    border-bottom: none !important;
+}
+
+.errord {
+  padding:0 0 2% 2%;
+  border-left:1px solid #ccc;
+  border-right:1px solid #ccc;
+}

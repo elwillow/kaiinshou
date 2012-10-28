@@ -39,6 +39,7 @@ from web import form
 import config
 import datetime
 import db
+import tools
 from view import render
 
 badgeForm = form.Form(
@@ -126,7 +127,7 @@ class create:
             f = badgeForm()
             return render.base(render.badge(f), "Nouvel insigne ~ New badge", True)
         else:
-             raise web.seeother(config.make_url('/error'))
+             raise web.seeother(tools.make_url('/'))
 
     def POST(self):
         cart_id = web.cookies().get(config.cookieName)
@@ -163,9 +164,9 @@ class create:
                 # Adding to DB
                 badge_id = db.addBadge(badge, cart_id)
 
-                raise web.seeother(config.make_url("/cart/add/%s" % badge_id))
+                raise web.seeother(tools.make_url("/cart/add/%s" % badge_id))
         else:
-             raise web.seeother(config.make_url('/error'))
+             raise web.seeother(tools.make_url('/error'))
 
 class edit:
     def GET(self, badge_id):
@@ -187,7 +188,7 @@ class edit:
             f.fill(badge)
             return render.base(render.badge(f), "Modifier une insigne ~ Edit a badge", True)
         else:
-            raise web.seeother(config.make_url('/error'))
+            raise web.seeother(tools.make_url('/error'))
 
     def POST(self, badge_id):
         cart_id = web.cookies().get(config.cookieName)
@@ -223,9 +224,9 @@ class edit:
                 # Adding to DB
                 db.updateBadge(badge, badge_id)
 
-                raise web.seeother(config.make_url("/cart/update/%s" % badge_id))
+                raise web.seeother(tools.make_url("/cart/update/%s" % badge_id))
         else:
-             raise web.seeother(config.make_url('/error'))
+             raise web.seeother(tools.make_url('/error'))
 
 class display:
     def GET(self, badge_id):

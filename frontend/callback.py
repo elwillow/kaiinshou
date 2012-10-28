@@ -33,3 +33,57 @@
 #       THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 #       (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 #       OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import web
+import logging
+import config
+import db
+import tools
+import hashlib
+from view import render
+
+logging.basicConfig(filename="/home/elwillow/paypal-callback.log",level=logging.DEBUG)
+
+class ipn:
+    def GET(self):
+        logging.debug("Callback GET")
+        return ""
+    def POST(self):
+        data = web.input()
+        logging.debug(data)
+        # If there is no txn_id in the received arguments don't proceed
+        if not "txn_id" in data:
+            logging.debug("No txn_id")
+            return "No Parameters"
+
+        # Verify the data received with Paypal
+        if not tools.verify_ipn(data):
+            logging.debug("Verification failed")
+            return "CALLBACK_FAILED"
+        logging.debug("IPN verification pass")
+
+        # If verified, store desired information about the transaction
+        transaction_data = {
+            "txn": data["txn_id"],
+            "amount": data["mc_gross"],
+            "fee": data["mc_fee"],
+            "email": data["payer_email"],
+            "name": data["first_name"] + " " + data["last_name"],
+            "status": data["payment_status"],
+            "payment_date": data["payment_date"]
+            }
+        logging.debug("CART_ID %s" % (data["invoice"], ))
+        logging.debug(transaction_data)
+        # Update DB
+        db.callbackBadge(data["invoice"], transaction_data)
+
+        # Send email
+        web.sendmail(config.email["debug_from"], config.email["debug"],
+                     "IPN", transaction_data)
+        hashEmail = hashlib.sha1()
+        hashEmail.update(transaction_data["email"])
+        hashEmail.update(config.salt)
+        logging.debug("Sending confirmation email to %s" % (transaction_data["email"], ))
+        web.sendmail(config.email["notice_from"], data["payer_email"],
+                     "G-Anime Pre-Registration", render.e_val(data["invoice"], hashEmail.hexdigest(), transaction_data))
+        return "CALLBACK_COMPLETE"

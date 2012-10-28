@@ -53,7 +53,7 @@ def badgeInfo(item):
         itemName = itemName + "Adulte (Ven.)"
         cost = 25
         tps = tps + 0,87
-        tvw = tvq + 1,73
+        tvq = tvq + 1,73
     elif item["type"] == "Weekend_Jeune":
         itemName = itemName + "Jeune"
         cost = 20
@@ -75,7 +75,7 @@ def badgeInfo(item):
         itemName = itemName + " + DVD"
         cost = cost + 20
 
-    return itemName, cost, (tps, tvq)
+    return itemName, cost, {"tps": tps, "tvq": tvq, "total": tps+tvq}
 
 def builtPaypalInput(item, i):
     itemName = "Badge %d: %s" % (item["badge_number"], badgeInfo(item)[0])
@@ -84,10 +84,24 @@ def builtPaypalInput(item, i):
         % {"i": i, "name": itemName, "value": badgeInfo(item)[1]}
 
 
+def noTaxes(info):
+    """
+    Accept a Extended info array (return by badgeInfo)
+    """
+    a = info[1] - info[2]["total"]
+    return "{0:.2f}".format(a)
+
+
+def qrCode(badge):
+    string = "TYPE-A_NUM-%(badge_number)s" % badge
+    return "<img src=\"http://chart.apis.google.com/chart?cht=qr&chs=100x100&chl=%s&chld=H|0\" />" % (string, )
+
 t_globals = dict(
   datestr=web.datestr,
   builtPaypalInput=builtPaypalInput,
   badgeInfo=badgeInfo,
+  noTaxes=noTaxes,
+  qrCode=qrCode,
   homeAddr=web.ctx.home,
   paypalUrl=config.paypalUrl,
   paypalAccount=config.paypalAccount,
@@ -120,6 +134,10 @@ def destroyCookie():
     return web.setcookie(config.cookieName, "", expires="-1", path="/",
         domain=None, secure=False)
 
+def getCartFee(cart_id):
+    """Return the fee for a cart"""
+    pass
+
 def cartListing(cart_id, messageInfo=None):
     """Return the HTML rendered list of items in the cart"""
     badges = db.badgeList(cart_id)
@@ -128,6 +146,7 @@ def cartListing(cart_id, messageInfo=None):
     else:
         badgesDetail = db.badgesDetail(badges)
     return render.cart(cart_id, badgesDetail, messageInfo)
+
 
 def badgeList(cart_id):
     """Return a array of badges from a cart id"""

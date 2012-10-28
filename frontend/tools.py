@@ -36,6 +36,8 @@
 
 import config
 import web
+from urllib import urlencode
+from urllib2 import urlopen, Request
 
 def make_url(url):
     """
@@ -64,3 +66,33 @@ def make_url(url):
             url_parts[2] = new_path
             url = urlparse.urlunparse(url_parts)
     return url
+
+def verify_ipn(data):
+    # prepares provided data set to inform PayPal we wish to validate the response
+    data["cmd"] = "_notify-validate"
+    params = urlencode(data)
+
+    # sends the data and request to the PayPal Sandbox
+    req = Request("""%s/cgi-bin/webscr""" % (config.paypalUrl, ), params)
+    req.add_header("Content-type", "application/x-www-form-urlencoded")
+    # reads the response back from PayPal
+    response = urlopen(req)
+    status = response.read()
+
+    # If not verified
+    if not status == "VERIFIED":
+        logging.debug("status is not verified")
+        return False
+
+    # if not the correct receiver ID
+    #if not data.receiver_id == config.paypalId:
+    #    logging.debug("receiver_id is %s" % (data.receiver_id, ))
+    #    return False
+
+    # if not the correct currency
+    #if not data["mc_currency"] == "CAD":
+    #    logging.debug("Wrong currency")
+    #    return False
+
+    # otherwise...
+    return True

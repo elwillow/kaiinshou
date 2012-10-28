@@ -4,7 +4,7 @@
 #       Filename: app.py
 #       Date:     2012-08-14
 #       author:   Mathieu Charron <mathieu@hyberia.ca>
-#       Project:  Kaiinshout
+#       Project:  Kaiinshou
 #
 #       Copyright 2012 Hyberia Inc.
 #
@@ -38,6 +38,7 @@ import web
 import view
 import config
 import db
+import tools
 from view import render
 
 urls = (
@@ -48,7 +49,7 @@ urls = (
     "/badge", "badge.create",
     "/badge/(.*)", "badge.display",
     "/edit/(.*)", "badge.edit",
-    "/callback", "auth.notify",
+    "/callback", "callback.ipn",
     "/merci", "thanks"
 )
 
@@ -75,10 +76,10 @@ class cartManagement:
     def GET(self, action, badge_id):
         cart_id = view.getCookie()
         if not cart_id:
-            raise web.seeother(config.make_url("/"))
+            raise web.seeother(tools.make_url("/"))
         elif "status" in db.getCart(cart_id):
             view.destroyCookie()
-            raise web.seeother(config.make_url("/"))
+            raise web.seeother(tools.make_url("/"))
 
         return render.base(view.cartListing(cart_id, (action, badge_id)))
 

@@ -1,4 +1,4 @@
-$def with (items, )
+$def with (items, extended, numbers)
 
 <article class="article clearfix">
 
@@ -9,8 +9,22 @@ $def with (items, )
 <h2>Votre recu ~ Your Receipt</h2>
 $if items:
     <table class="table">
+    <tr><td width="100px"></td><th width="70px">Badge #</th><td>Nom</td><td>Type</td><td width="60px">Prix</td></tr>
     $for item in items:
-        $:render.item(item, loop.index)
+        $:render.item_taxed(item, extended[loop.index-1], loop.index)
+
+    <tr class="summary">
+    <td colspan="4" class="summary">Sous-Total</td><td>$numbers["sub"] $$</td>
+    </tr>
+    <tr class="summary">
+    <td colspan="4" class="summary">TPS</td><td>$numbers["tps"] $$</td>
+    </tr>
+    <tr class="summary">
+    <td colspan="4" class="summary">TVQ</td><td>$numbers["tvq"] $$</td>
+    </tr>
+    <tr class="summary" style="font-weight:bold;">
+    <td colspan="4" class="summary">Total</td><td>$numbers["total"] $$</td>
+    </tr>
     </table>
 </div>
 </article>

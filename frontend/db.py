@@ -68,6 +68,8 @@ def callbackBadge(cart_id, data):
     if config.DB.carts.update({"_id": objectid.ObjectId(cart_id)}, {"$set": data}):
         return True
 
+    # @TODO Update the badges so they show as valid
+
     # something went wrong
     else:
         return False
