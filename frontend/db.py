@@ -22,7 +22,7 @@ def newCart(cartNumber):
     return config.DB.carts.insert(cart)
 
 def getCart(cart_id):
-    """Return a single badge detail"""
+    """Return the array for a given cart"""
     return config.DB.carts.find_one({"_id": objectid.ObjectId(cart_id)})
 
 def cartValidEmail(cart_id):
@@ -74,7 +74,7 @@ def callbackBadge(cart_id, data):
     else:
         return False
 
-def badgeList(cart_id):
+def getBadgeList(cart_id):
     """Return all the badges in a given cart"""
     try:
         badges = config.DB.carts.find_one({"_id": objectid.ObjectId(cart_id)})["badges"]
@@ -84,8 +84,8 @@ def badgeList(cart_id):
         badges = None
     return badges
 
-def badgesDetail(badges):
-    """Return an array matching everything in badges"""
+def getBadgesDetail(badges):
+    """Return an array matching every ObjectID passed"""
     return list(config.DB.badges.find({"_id": {"$in": badges}}))
 
 def getBadge(badge_id):

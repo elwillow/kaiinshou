@@ -44,7 +44,7 @@ class pickup:
         try:
             bson.objectid.ObjectId(cart_id)
         except bson.errors.InvalidId:
-            return cart_id
+            return "Nope!"
             #return render.base(render.receipt(), "Pickup", True)
         # calculate the taxes
         numbers = {"tps": 0, "tvq": 0, "taxes": 0, "sub": 0, "total": 0}
@@ -62,4 +62,4 @@ class pickup:
         numbers["taxes"] = numbers["tps"] + numbers["tvq"]
         numbers["sub"] = numbers["total"] - numbers["taxes"]
 
-        return render.base(render.receipt(badgesList, badges, numbers), "Receipt", True)
+        return render.base(render.receipt(badgesList, badges, numbers, cart_id), "Receipt", True)

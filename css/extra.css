@@ -19,3 +19,10 @@
   border-left:1px solid #ccc;
   border-right:1px solid #ccc;
 }
+
+@media print {
+    .article {
+        border: 0;
+    }
+
+}

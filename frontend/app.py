@@ -50,7 +50,8 @@ urls = (
     "/badge/(.*)", "badge.display",
     "/edit/(.*)", "badge.edit",
     "/callback", "callback.ipn",
-    "/merci", "thanks"
+    "/merci", "thanks",
+    "/error", "error"
 )
 
 
@@ -92,15 +93,20 @@ class thanks:
         return render.base("""<p>Votre session est maintenant terminé. Vérifier vos courriels pour votre confirmation d'inscription.</p>
         <p>Pour toutes questions, contactez <a href="mailto:inscription@ganime.ca">inscription@ganime.ca</a>""")
 
+class error:
+    def GET(self):
+        """Return the error page"""
+        return render.error(500)
+
 def notfound():
-    return web.notfound(render.base("""<span id="message" class="bad">404: Not Found.</span>""", "404", True))
+    return web.notfound(render.error(404))
 def internalerror():
-    return web.internalerror(render.base("""<span id="message" class="bad">500: Server Error.</span>""", "500", True))
+    return web.internalerror(render.error(500))
 
 
 if __name__ == "__main__":
     app = web.application(urls, globals())
     app.notfound = notfound
     app.internalerror = internalerror
-    #app.internalerror = web.debugerror
+    app.internalerror = web.debugerror
     app.run()

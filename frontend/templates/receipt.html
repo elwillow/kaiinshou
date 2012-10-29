@@ -1,15 +1,20 @@
-$def with (items, extended, numbers)
+$def with (items, extended, numbers, cart_id)
 
 <article class="article clearfix">
 
 <div class="col_33">
-<p></p>
+<p>#TEXT_PREREG_RECEIPT#</p>
+<p>#TEXT_HOW_TO_CLAIM_BADGE#</p>
 </div>
 <div class="col_66">
 <h2>Votre recu ~ Your Receipt</h2>
+<ul>
+<li>Purchase Date: $:getCartDate(cart_id)</li>
+<li>Purchase by: $:getCartPayee(cart_id)</li>
+</ul>
 $if items:
     <table class="table">
-    <tr><td width="100px"></td><th width="70px">Badge #</th><td>Nom</td><td>Type</td><td width="60px">Prix</td></tr>
+    <tr><td width="100px"></td><th width="70px"><strong>#</strong></th><td>Nom</td><td>Type</td><td width="60px">Prix</td></tr>
     $for item in items:
         $:render.item_taxed(item, extended[loop.index-1], loop.index)
 
@@ -17,14 +22,19 @@ $if items:
     <td colspan="4" class="summary">Sous-Total</td><td>$numbers["sub"] $$</td>
     </tr>
     <tr class="summary">
-    <td colspan="4" class="summary">TPS</td><td>$numbers["tps"] $$</td>
+    <td colspan="4" class="summary">TPS <em>(#805015310)</em></td><td>$numbers["tps"] $$</td>
     </tr>
     <tr class="summary">
-    <td colspan="4" class="summary">TVQ</td><td>$numbers["tvq"] $$</td>
+    <td colspan="4" class="summary">TVQ <em>(#1214385518)</em></td><td>$numbers["tvq"] $$</td>
     </tr>
     <tr class="summary" style="font-weight:bold;">
     <td colspan="4" class="summary">Total</td><td>$numbers["total"] $$</td>
     </tr>
     </table>
+<p>Pour <strong>toutes</strong> information ~ For <strong>all</strong> inquiries: <a href="inscription@ganime.ca">inscription@ganime.ca</a></p>
+<address class="right">Société Japonaise de Gatineau<br />
+323 de Canadel<br />
+Gatineau, Québec
+</address>
 </div>
 </article>

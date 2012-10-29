@@ -35,88 +35,11 @@
 #       OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import web
-from web import form
 import config
 import datetime
 import db
 import tools
 from view import render
-
-badgeForm = form.Form(
-    form.Textbox("prenom", form.notnull,
-        description="Prénom / First Name"),
-    form.Textbox("nom", form.notnull,
-        description="Nom / Last Name"),
-    form.Textbox("texte_insigne",
-        description="Texte sur l'insigne / Texte on the badge"),
-    form.Textbox("courriel", form.notnull,
-        description="Courriel / Email"),
-
-    form.Textbox("adresse_1", form.notnull,
-        description="Adresse 1 / Address 1"),
-    form.Textbox("adresse_2",
-        description="Adresse 2 / Address 2"),
-    form.Textbox("ville", form.notnull,
-        description="Ville / City"),
-    form.Dropdown("province",
-        [
-            ("", "Sélectionner"),
-            ("AB", "Alberta (AB)"),
-            ("BC", "British Columbia (BC)"),
-            ("MB", "Manitoba (MB)"),
-            ("NB", "New Brunswick (NB)"),
-            ("NL", "Newfoundland and Labrador (NL)"),
-            ("NT", "Northwest Territories (NT)"),
-            ("NS", "Nova Scotia (NS)"),
-            ("NU", "Nunavut (NU)"),
-            ("PE", "Prince Edward Island (PE)"),
-            ("SK", "Saskatchewan (SK)"),
-            ("ON", "Ontario (ON)"),
-            ("QC", "Québec (QC)"),
-            ("YT", "Yukon (YT)"),
-            ("USA", "USA"),
-            ("OTHER", "Other / Autre"),
-        ], form.notnull,
-        description="Province / Province"),
-    form.Textbox("code_postal", form.notnull,
-        description="Code postal / Postal Code"),
-    form.Textbox("telephone_urgence", form.notnull,
-        description="Téléphone d'urgence / Emergency phone #"),
-    # Type de badge
-    form.Dropdown("type",
-        [
-            ("Weekend_Adulte", "Fin de semaine, Adulte / Weekend Pass, Adult ~ 35$"),
-            ("Weekend_Jeune", "Fin de semaine, 8 à 12 ans / Weekend Pass, 8 to 12 years old ~ 20$"),
-            ("Weekend_Enfant", "Fin de semaine, 0 à 7 ans / Weekend Pass, 0 to 7 years old ~ 0$"),
-            ("Friday_Adulte", "Vendredi seulement, Adulte / Friday only, Adult ~ 25$"),
-            ("Friday_Jeune", "Vendredi seulement, 8 à 12 ans / Friday only, 8 to 12 years old ~ 20$"),
-        ], form.notnull,
-        description="Type de billet / Ticket type"),
-    form.Dropdown("noiz",
-        [
-            ("non", "Non / No"),
-            ("oui", "Oui / Yes (20$)")
-        ],
-        value="non",
-        description="Spectacle NOIZ (vendredi soir) / NOIZ show (Friday night)"),
-    form.Dropdown("tshirt",
-        [
-            ("X", "Aucun / None"),
-            ("P", "Petit / Small"),
-            ("M", "Moyen / Medium"),
-            ("G", "Grand / Large"),
-            ("TG", "Très grand / X-large")
-        ], description="T-Shirt", pre="20 $"),
-    form.Dropdown("dvd",
-        [
-            ("non", "Non / No"),
-            ("oui", "Oui / Yes (20$)")
-        ],
-        value="non",
-        description="DVD de la mascarade / Masquerade DVD"),
-    form.Textarea("instructions_speciales", rows=2, cols=40,
-        description="Instructions spécial / Specials Instructions")
-    )
 
 
 class create:
@@ -124,7 +47,7 @@ class create:
     def GET(self):
         cart_id = web.cookies().get(config.cookieName)
         if cart_id:
-            f = badgeForm()
+            f = config.formBadge()
             return render.base(render.badge(f), "Nouvel insigne ~ New badge", True)
         else:
              raise web.seeother(tools.make_url('/'))
@@ -133,7 +56,7 @@ class create:
         cart_id = web.cookies().get(config.cookieName)
         if cart_id:
             # We have a cart, proceed
-            f = badgeForm()
+            f = config.formBadge()
             if not f.validates():
                 return render.base(render.badge(f), "Nouvel insigne ~ New badge", True)
             else:
@@ -172,7 +95,7 @@ class edit:
     def GET(self, badge_id):
         cart_id = web.cookies().get(config.cookieName)
         if cart_id:
-            f = badgeForm()
+            f = config.formBadge()
             if not db.validObjectId(badge_id):
                 raise web.seeother('/error')
 
@@ -194,7 +117,7 @@ class edit:
         cart_id = web.cookies().get(config.cookieName)
         if cart_id:
             # We have a cart, proceed
-            f = badgeForm()
+            f = config.formBadge()
             if not f.validates():
                 return render.base(render.badge(f), "Editer une insigne ~ Edit a badge", True)
             else:

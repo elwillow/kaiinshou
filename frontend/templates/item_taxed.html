@@ -1,7 +1,12 @@
 $def with (item, extend, i)
 <tr style="border:0;">
 <td rowspan=2>$:qrCode(item)</td>
-<th>$item["badge_number"]</th><td>$item["prenom"] $item["nom"]</td>
+<th>
+$if "code" in item:
+    $item.code
+$else:
+    A
+<strong>$item["badge_number"]</strong></th><td>$item["prenom"] $item["nom"]</td>
 <td class="type">$extend[0]</td><td class="summary">$:noTaxes(extend) $$</td>
 </tr>
 <tr>
