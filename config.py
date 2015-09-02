@@ -9,12 +9,12 @@ from pymongo import Connection
 mongoURI = "mongodb://ganime:2EKY7BSN@127.0.0.1/registration"
 
 # For testing puposes
-#paypalAccount = "mathie_1345421600_biz@hyberia.ca"
+#paypalAccount = ""
 #paypalUrl = "https://www.sandbox.paypal.com"
-#paypalId = "9B3P56RWHB85Q"
-paypalAccount = "finance@ganime.ca"
+#paypalId = ""
+paypalAccount = ""
 paypalUrl = "https://www.paypal.com"
-paypalId = "SP2X3RHPES2HU"
+paypalId = ""
 
 cookieName = "ganime_cartid"
 salt = "+828497786499849"
